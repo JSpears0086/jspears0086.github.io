@@ -20,22 +20,18 @@
          <button type='button' class="btn btn-primary" onClick="getData('BUS')">Business Majors</button> 
       </div>
   
-  <h3>We filter our dataset by meal</h3>
-  <div id="menuTable"></div>
-      <p>Menu Data originally provided by  <a href='https://manual.cs50.net/api/food/'>manual.cs50.net/api/food/</a></p>
-      <p>Items are from HUDS, which is the Harvard University Dining Services. The above link is very old, and no longer leads 
-to information on the food API, and I can find no updated information on attribution.</p>
-      <p>CS 50 is a popular intro to computer science course offered by Harvard University.</p> 
+  <h3>We filter our dataset by major</h3>
+  <div id="majorTable"></div>
   </div>   <!-- end class='container'   -->
   </body>
 
  <!-- Handlebars template -->
   <script type="text/x-handlebars-template" id="tableTemplate">
       <table class="table table-striped">
-          <tr><th>Item</th><th>Meal</th><th>Category</th><th>Portion</th></tr>
+          <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
              {{#each rows}}
                 <tr>
-                     <td>{{name}}</td><td>{{meal}}</td><td>{{category}}</td><td>{{portion}}</td>
+                     <td>{{name}}</td><td>{{major}}</td><td>{{midterm}}</td><td>{{final}}</td>
                 </tr>
              {{/each}}
       </table>
