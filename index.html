@@ -43,7 +43,7 @@
 
   function getData(selected_major) {      // called when a button is clicked. paramter selected_major = CIT or BUS
       var request = new XMLHttpRequest();
-      request.open('GET', 'cit5students .json');      // open Ajax request for data file cit5students.json
+      request.open('GET', 'cit5students.json');      // open Ajax request for data file cit5students.json
  
       request.onload = function() {                     // when the data comes back, browser calls this function
          var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
