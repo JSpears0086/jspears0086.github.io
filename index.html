@@ -1,70 +1,72 @@
-<!DOCTYPE html><html>
-<head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>menu items</title>
+<!DOCTYPE html>
+<html><head><title>Program 6, Angular JS</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script> 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
-    <!-- bootstrap on github, need to use https for these links -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-    <style> .btn{margin: 5px} </style>
 </head>
+<body ng-app = "homeApp">
 
+<div class="container">
+<nav class="navbar navbar-inverse">
 
-<body>
-  <div class="container">
-      <h2>Select a Major</h2>
-      <div style='padding: 5px;'> 
-         <button type='button' class="btn btn-primary" onClick="getData('CIT')">CIT Majors</button> 
-         <button type='button' class="btn btn-primary" onClick="getData('BUS')">Business Majors</button> 
-      </div>
-  
-  <h3>We filter our dataset by major</h3>
-  <div id="majorTable"></div>
-  </div>   <!-- end class='container'   -->
-  </body>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Our Website</a>
+    </div>
+    <div>
+       <ul class="nav navbar-nav">
+           <li class="active"><a href="index.html">Welcome</a></li>
+           <li><a href="all_cars.html">All the Cars</a></li>
+       </ul>
+    </div>
 
- <!-- Handlebars template -->
-  <script type="text/x-handlebars-template" id="tableTemplate">
-      <table class="table table-striped">
-          <tr><th>Name</th><th>Major</th><th>Midterm</th><th>Final</th></tr>
-             {{#each rows}}
-                <tr>
-                     <td>{{name}}</td><td>{{major}}</td><td>{{midterm}}</td><td>{{final}}</td>
-                </tr>
-             {{/each}}
-      </table>
-  </script>
+</nav>    <!-- end nav-bar -->
 
-  <!-- application ajax code -->
-  <script>
+<div ng-controller = "homeCtrl">
 
-
-  function getData(selected_major) {      // called when a button is clicked. paramter selected_major = CIT or BUS
-      var request = new XMLHttpRequest();
-      request.open('GET', 'cit5students.json');      // open Ajax request for data file cit5students.json
- 
-      request.onload = function() {                     // when the data comes back, browser calls this function
-         var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
-
-         cit5students = data.filter(getMajor)       // cit5students array will contain the filtered data using the getMajor() function
-         function getMajor(item) {
-            return item.major == selected_major;   // the new cit5students array will contain only items for the selected major
-         }
+	<h2>Welcome to Metro Cars For Sale</h2>
+  	<p>We offer up a list of used cars for sale as listed in the following local dealerships</p>
+    
+    <p>Today is: {{date}}</p>      
+    
+          <table class="table table-bordered table-striped">
+          	<tr>
+             	<th>Dealer</th>
+              	<th>Address</th>
+              	<th>Phone</th>
+          	</tr>
+          	<tr> <td>Joe Smith Cars & Trucks</td><td>123 Automall Rd.</td><td>555-2345</td></tr>
+            <tr> <td>Sue Green Motorworld</td><td>1888 South St.</td><td>555-2345</td></tr>
+			<tr> <td>Dave Jones Chrysler</td>
+			<td>30301 Brook Rd.</td><td>555-3456</td></tr>
+			<tr> <td>Kim Ivanov Quality Cars</td><td>4334 Yanovich Blvd.</td><td>555-4567</td></tr>
+			<tr> <td>Max Johnson Chevrolet</td><td>55221 Johnsonville Rd.</td><td>555-4321</td></tr>
+			<tr> <td>Linda Silver VDub</td><td>5491 Main Ave.</td><td>555-5432</td></tr>
+			<tr> <td>Stu Mar Autorama</td><td>14 Baker Blvd.</td><td>555-6543</td></tr>
+			<tr> <td>Moe Hernandez Motors</td><td>92917 Stacy Rd.</td><td>555-3251</td></tr>
+     	</table>
         
-        if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
-            var templateText = document.getElementById('tableTemplate').innerHTML;
-            var compiledTemplateText = Handlebars.compile(templateText);       
-            compiledHtml = compiledTemplateText({ rows: cit5students })          
-            document.getElementById('majorTable').innerHTML = compiledHtml; 
-        }
-        else {
-            document.querySelector('#majorTable').innerHTML = "There was an error, or menu items not found";
-        }
-     }
-     
-     request.send(null);
-  }
+        <p>All dealerships offer:
+        	<ol class='class="list-group"'>
+        		<li class="list-group-item">Friendly Service</li>
+            	<li class="list-group-item">On-lot Financing</li>
+           	 	<li class="list-group-item">Extended Warrantees</li>
+       		</ol>
+        </p>
+        
+</div>   <!-- end homeCtrl -->
+</div>   <!-- end class= 'container' -->
+
+<script>
+var app = angular.module('homeApp', []);
+
+app.controller('homeCtrl', function($scope, $http) {
+  
+     var today = new Date();  /* get today's date */
+     $scope.date= today.toDateString()
+	   
+});
+		  
 </script>
-</html>
+</body></html>
